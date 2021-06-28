@@ -23,11 +23,14 @@ function App() {
         updateUsers();
     }, []);
 
-    const updateMyData = (rowIndex, columnName, value) => {
+    const updateData = (rowIndex, columnName, value) => {
+        if (value.getTime() > Date.now()) // date not in the future validation
+            return;
+
         setUsers(old =>
             old.map((row, index) => {
                 if (index === rowIndex) {
-                    // validate
+                    // Last activity later then date registration validation
                     if (columnName === 'dateLastActivity' && row.dateRegistration > value){
                         return row
                     }
@@ -70,7 +73,7 @@ function App() {
                 </div>
                 <Table
                     data={users}
-                    updateMyData={updateMyData}
+                    updateMyData={updateData}
                 />
                 <div className='my-1'>
                     <div className={metricsVisibility ? '' : 'collapse'}>
