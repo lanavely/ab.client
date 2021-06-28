@@ -11,7 +11,7 @@ function App() {
     const [users, setUsers] = useState([]);
 
     async function updateUsers(){
-        const result = await axios.get('https://localhost:5001/api/users');
+        const result = await axios.get('https://abtestserver.herokuapp.com/api/users');
         setUsers(result.data.map(i => { return {
             id: i.id,
             dateRegistration: new Date(Date.parse(i.dateRegistration)),
@@ -41,15 +41,15 @@ function App() {
 
     async function handleCalculate() {
         await handleSave()
-        const rollingRes = await axios.get('https://localhost:5001/api/metrics/rolling/7')
+        const rollingRes = await axios.get('https://abtestserver.herokuapp.com/api/metrics/rolling/7')
         setRolling(rollingRes.data)
-        const liveDurationRes = await axios.get('https://localhost:5001/api/metrics/lifedurations');
+        const liveDurationRes = await axios.get('https://abtestserver.herokuapp.com/api/metrics/lifedurations');
         setLiveDurations(liveDurationRes.data)
         setMetricsVisibility(true)
     }
 
     async function handleSave() {
-        await axios.post('https://localhost:5001/api/users', users)
+        await axios.post('https://abtestserver.herokuapp.com/api/users', users)
         await updateUsers();
     }
 
