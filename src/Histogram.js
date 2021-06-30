@@ -7,11 +7,11 @@ export default function Histogram({data}) {
 
     useEffect(() => {
         setChartData({
-            labels: data.map(i => i.userId),
+            labels: data.map(i => i.value),
             datasets: [
                 {
-                    label: 'Live duration',
-                    data: data.map(i => moment.duration(i.duration).days()),
+                    label: 'Count',
+                    data: data.map(i => i.count),
                     backgroundColor: 'rgba(12, 110, 253)'
                 }
             ]
